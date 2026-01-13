@@ -17,14 +17,32 @@
 
     .title-lg {
     	font-size: 38px;
+
+    	@media(max-width: 1024px){
+    		font-size: 30px;
+    	}
+    	@media(max-width: 768px){
+    		font-size: 25px;
+    	}
     }
 
     .title-md {
     	font-size: 28px;
+
+    	@media(max-width: 1024px){
+    		font-size: 22px;
+    	}
+    	@media(max-width: 768px){
+    		font-size: 20px;
+    	}
     }
 
     .title-sm {
     	font-size: 18px;
+
+    	@media(max-width: 1024px){
+    		font-size: 17px;
+    	}
     }
 }
 
@@ -36,8 +54,44 @@
     			url("../images/footer-bg-left-palm.svg") no-repeat 0 104%,
     			url("../images/footer-bg-right-palm.svg") no-repeat right 104%, #EFA954;
 
+    @media(max-width: 1400px){
+    	background: url("../images/header-bg.svg") no-repeat center -76px / 200% 100px,
+    				url("../images/footer-bg-left-palm.svg") no-repeat 0 104%,
+    				url("../images/footer-bg-right-palm.svg") no-repeat right 104%, #EFA954;
+    }
+    @media(max-width: 1024px){
+    	padding: 40px 0 12px;
+    	background: url("../images/header-bg.svg") no-repeat center -72px / 200% 100px,
+    				url("../images/footer-bg-left-palm.svg") no-repeat -30% 104%,
+    				url("../images/footer-bg-right-palm.svg") no-repeat 110% 104%, #EFA954;
+    }
+    @media(max-width: 910px){
+    	background: url("../images/header-bg.svg") no-repeat center -67px / 200% 100px,
+    				url("../images/footer-bg-left-palm.svg") no-repeat -50% 104%,
+    				url("../images/footer-bg-right-palm.svg") no-repeat 130% 104%, #EFA954;
+    }
+    @media(max-width: 768px){
+    	background: url("../images/header-bg.svg") no-repeat center -65px / 200% 100px,
+    				url("../images/footer-bg-left-palm.svg") no-repeat -5% 104% / 170px 115px,
+    				url("../images/footer-bg-right-palm.svg") no-repeat 100% 104% / 170px 136px, #EFA954;
+    }
+    @media(max-width: 640px){
+    	background: url("../images/header-bg.svg") no-repeat center 78px / 500% 100px #EFA954;
+    	border-width: 10px;
+    	padding-top: 0;
+
+    }
+    @media(max-width: 550px){
+    	background: url("../images/header-bg.svg") no-repeat center 90px / 500% 100px #EFA954;
+    }
+
 	.container {
 		position: relative;
+
+		@media(max-width: 640px){
+			display: flex;
+			flex-direction: column;
+		}
 	}
 }
 
@@ -45,10 +99,57 @@
 	position: absolute;
 	right: 15px;
 	top: -402px;
+
+	@media(max-width: 1024px){
+		right: 10px;
+	    top: -280px;
+	}
+	@media(max-width: 768px){
+		top: -230px;
+	}
+	@media(max-width: 640px){
+		position: relative;
+		top: auto;
+		right: auto;
+		order: -1;
+		margin: -90px 0 25px;
+		width: 100%;
+        text-align: center;
+
+		&:before {
+			content: "";
+			position: absolute;
+			left: 0;
+        	right: 0;
+			top: 42px;
+        	height: 100px;
+			transform: rotate(180deg);
+			background: url("../images/header-bg.svg") no-repeat center 0;
+			scale: 2;
+			pointer-events: none;
+		}
+	}
+
+	.img {
+		@media(max-width: 1024px){
+		    width: 290px;
+		}
+		@media(max-width: 768px){
+			width: 230px;
+		}
+		@media(max-width: 640px){
+			width: 304px;
+			position: relative;
+		}
+	}
 }
 
 .footer-text {
 	margin-bottom: 46px;
+
+	@media(max-width: 768px){
+		margin-bottom: 30px;
+	}
 
 	.row {
 		margin-bottom: 10px;
@@ -67,6 +168,16 @@
 	.navbar {
 		margin: 0 0 8px 0;
 		justify-content: center;
+
+		.item {
+			&:nth-child(odd) {
+				.name {
+			  		@media(max-width: 480px){
+						display: none;
+					}
+				}
+			}
+		}
 	}
 
 	.box {
@@ -78,11 +189,43 @@
 	}
 }
 
+.logo-intro {
+	display: inline-block;
+
+	@media(max-width: 1024px){
+		img {
+			width: 200px;
+		}
+	}
+	@media(max-width: 768px){
+		img {
+			width: 170px;
+		}
+	}
+	// @media(max-width: 768px){
+	// 	img {
+	// 		width: 150px;
+	// 	}
+	// }
+	// @media(max-width: 480px){
+	// 	img {
+	// 		width: 130px;
+	// 	}
+	// }
+}
+
 .footer-list {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	font-weight: 500;
+
+	@media(max-width: 768px){
+		justify-content: center;
+	}
+	@media(max-width: 480px){
+		flex-wrap: wrap;
+	}
 
 	.item {
 		display: flex;
@@ -113,4 +256,10 @@
 .copy {
 	color: var(--dark-60, rgba(0, 0, 0, 0.60));
 	max-width: 454px;
+}
+
+.mob-hide {
+	@media(max-width: 640px){
+		display: none;
+	}
 }
