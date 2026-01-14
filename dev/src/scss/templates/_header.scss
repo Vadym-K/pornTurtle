@@ -763,6 +763,25 @@
 		}
 	}
 
+	.text-name {
+		color: var(--white-60, rgba(255, 255, 255, 0.60));
+		display: -webkit-box;
+	  -webkit-line-clamp: 3;
+	  -webkit-box-orient: vertical;
+	  overflow: hidden;
+
+	  @media(max-width: 768px){
+	  	width: 50%;
+	  	margin: 0 auto;
+	  	display: block;
+	  }
+	  @media(max-width: 480px){
+	  	text-align: left;
+	  	width: 100%;
+	  	padding-left: 45px;
+	  }
+	}
+
 	.cat-bottom {
 		border-color: #DFB06F;
     background: #070707;
@@ -813,6 +832,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			flex-shrink: 0;
 			border-radius: 50%;
 			border-bottom: 2px solid transparent;
 			background: var(--dark-20, rgba(0, 0, 0, 0.20));
