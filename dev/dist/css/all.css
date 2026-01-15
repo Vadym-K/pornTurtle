@@ -467,6 +467,70 @@ input.placeholder, textarea.placeholder {
 	padding-bottom: 24px;
 }
 
+.header-scrolled {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+}
+.header-scrolled .header-text {
+	display: none;
+}
+.header-scrolled .search-header {
+	order: -1;
+	margin-right: 10px;
+}
+.header-scrolled .theme-wrap {
+	margin-left: 0;
+}
+.header-scrolled .header-cols .col-right {
+	width: 100%;
+}
+.header-scrolled .header-cols .col-left {
+	display: none;
+}
+.header-scrolled .header-cols .col-right .wrap {
+	margin-bottom: 0;
+}
+.header-scrolled .header-controls {
+	margin-left: 0;
+	flex-grow: 1;
+}
+.header-scrolled .col-right {
+	display: flex;
+	align-items: center;
+}
+.header-scrolled .header-top {
+	display: none;
+}
+.header-scrolled .logo-scrolled {
+	display: block;
+}
+.header-scrolled .header-bottom:after {
+	height: 100%;
+}
+.header-scrolled .header-bottom {
+	border-top: none;
+}
+@media (min-width: 911px) and (max-width: 1150px) {
+	.header-scrolled .nav-link .icon + .name,
+	.header-scrolled .fake-placeholder .name {
+		display: none;
+	}
+	.header-scrolled .navbar .btn-custom {
+		padding: 4px 12px;
+	}
+}
+
+.logo-scrolled {
+	display: none;
+}
+.logo-scrolled img {
+	display: block;
+	height: 105px;
+}
+
 .open-menu,
 .open-search {
 	background-color: #2B2A29;

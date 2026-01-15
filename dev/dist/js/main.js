@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	langToggle();
 	initThemeSwitcher();
 	initMobileMenu();
+	initHeaderScroll('.header', 'header-scrolled');
 });
 
 function langToggle() {
@@ -85,4 +86,22 @@ function initMobileMenu() {
 		header.classList.remove('open-menu');
 		toggleNoScroll(isSearchOpen);
 	});
+}
+
+function initHeaderScroll(headerSelector, activeClass, minWidth = 911) {
+	const header = document.querySelector(headerSelector);
+	if (!header) return;
+
+	function onScroll() {
+		if (window.innerWidth >= minWidth && window.scrollY > 0) {
+			header.classList.add(activeClass);
+		} else {
+			header.classList.remove(activeClass);
+		}
+	}
+
+	window.addEventListener('scroll', onScroll);
+	window.addEventListener('resize', onScroll);
+
+	onScroll();
 }
