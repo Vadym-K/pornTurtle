@@ -302,6 +302,34 @@ body {
 			}
 		}
 
+		.blogs-wrap {
+			background-color: #a7a2a2;
+		}
+
+		.blogs-wrap .cols,
+		.pagination {
+			background-color: #c2c0c0;
+		}
+
+		.blogs-wrap .wrap-btn .btn-custom {
+			color: #fff;
+
+			@media(hover: hover) and (pointer: fine){
+				&:hover{
+					color: #EFA954;
+				}
+			}
+		}
+
+		.page-link {
+			color: #fff;
+		}
+
+		.pagination .item.active:before,
+		.pagination .item.active:after {
+			background-color: #c6b399;
+		}
+
 	}
 }
 a{
