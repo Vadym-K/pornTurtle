@@ -276,7 +276,8 @@ body.light .info-block:after {
 		bottom: 65px;
 	}
 }
-body.light .blogs-wrap {
+body.light .blogs-wrap,
+body.light .col-thumb {
 	background-color: #a7a2a2;
 }
 body.light .blogs-wrap .cols,
@@ -2851,6 +2852,22 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 		margin-top: 20px;
 	}
 }
+.blogs-wrap.second {
+	margin-bottom: 40px;
+}
+.blogs-wrap.second .wrap-img {
+	margin-bottom: 34px;
+}
+.blogs-wrap.second .text,
+.blogs-wrap.second .title-name {
+	padding: 0 12px;
+}
+.blogs-wrap .row {
+	margin-bottom: 50px;
+}
+.blogs-wrap .row:last-child {
+	margin-bottom: 0;
+}
 .blogs-wrap .cols {
 	display: flex;
 	align-items: center;
@@ -2893,6 +2910,10 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 	.blogs-wrap .wrap-img {
 		max-width: 100%;
 	}
+}
+.blogs-wrap .wrap-img.center {
+	max-width: 786px;
+	margin: 0 auto 34px;
 }
 .blogs-wrap .wrap-img img {
 	display: block;
@@ -2965,6 +2986,15 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 	margin-left: 8px;
 	transform: rotate(-90deg);
 	font-size: 12px;
+}
+
+.blog-list {
+	color: var(--white-60, rgba(255, 255, 255, 0.6));
+	list-style-type: disc;
+	padding: 0 12px 0 37px;
+	line-height: 1.4;
+	font-weight: 500;
+	font-size: 17px;
 }
 
 .aux {
@@ -3131,6 +3161,60 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 .page-link .icon {
 	position: relative;
 	z-index: 1;
+}
+
+.cols-thumbs {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 -12px -24px;
+}
+@media (max-width: 640px) {
+	.cols-thumbs {
+		margin: 0;
+	}
+}
+
+.col-thumb {
+	width: calc(50% - 24px);
+	border-radius: 20px;
+	background: var(--color-dark_bg_block, #1B1B1B);
+	padding: 10px 16px 16px;
+	margin: 0 12px 24px;
+}
+@media (max-width: 640px) {
+	.col-thumb {
+		width: 100%;
+		margin: 0 0 10px;
+	}
+	.col-thumb:last-child {
+		margin-bottom: 0;
+	}
+}
+.col-thumb .title-name {
+	margin-bottom: 12px;
+	font-weight: 500;
+	font-size: 28px;
+	padding: 0 4px;
+	text-transform: uppercase;
+}
+@media (max-width: 910px) {
+	.col-thumb .title-name {
+		font-size: 22px;
+		margin-bottom: 4px;
+	}
+}
+@media (max-width: 380px) {
+	.col-thumb .title-name {
+		font-size: 20px;
+	}
+}
+.col-thumb .wrap-img {
+	border-radius: 20px;
+	overflow: hidden;
+}
+.col-thumb .wrap-img img {
+	display: block;
+	width: 100%;
 }
 
 .footer {
