@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	langToggle();
 	initThemeSwitcher();
 	initMobileMenu();
-	initHeaderScroll('.header', 'header-scrolled');
+	initHeaderScroll('.header', 'header-scrolled', '.main');
+	initLinkHoverInfo();
 });
 
 function langToggle() {
@@ -88,20 +89,156 @@ function initMobileMenu() {
 	});
 }
 
-function initHeaderScroll(headerSelector, activeClass, minWidth = 911) {
+function initHeaderScroll(headerSelector, activeClass, mainSelector, minWidth = 911) {
 	const header = document.querySelector(headerSelector);
-	if (!header) return;
+	const main = document.querySelector(mainSelector);
 
-	function onScroll() {
-		if (window.innerWidth >= minWidth && window.scrollY > 0) {
+	if (!header || !main) return;
+
+	let isActive = false;
+	let lastScrollY = window.scrollY;
+	const OFFSET = 50;
+
+	function updateLayout() {
+		const currentScrollY = window.scrollY;
+		const isScrollingUp = currentScrollY < lastScrollY;
+
+		if (
+			window.innerWidth >= minWidth &&
+			currentScrollY > OFFSET &&
+			!isActive
+		) {
+			isActive = true;
 			header.classList.add(activeClass);
-		} else {
+
+			const headerHeight = header.offsetHeight;
+			main.style.paddingTop = `${headerHeight + 130}px`;
+		}
+
+		if (
+			isActive &&
+			isScrollingUp &&
+			currentScrollY <= OFFSET
+		) {
+			isActive = false;
 			header.classList.remove(activeClass);
+			main.style.paddingTop = '';
+		}
+
+		lastScrollY = currentScrollY;
+	}
+
+	window.addEventListener('scroll', updateLayout);
+	window.addEventListener('resize', updateLayout);
+
+	updateLayout();
+}
+
+function initLinkHoverInfo() {
+	const MIN_WIDTH = 1025;
+	const infoBlock = document.querySelector('.js-info');
+	const header = document.querySelector('.header');
+
+	if (!infoBlock) return;
+
+	const infoImg = infoBlock.querySelector('.js-info-img');
+	const infoTitle = infoBlock.querySelector('.js-info-title');
+	const infoText = infoBlock.querySelector('.js-info-text');
+
+	const ratingValueEl = infoBlock.querySelector('.js-info-rating');
+	const ratingIconsWrap = infoBlock.querySelector('.js-rating');
+
+	const LIKE_SRC = 'images/like.svg';
+	const DISLIKE_SRC = 'images/dislike.svg';
+	const MAX_RATING = 5;
+
+	function isDesktop() {
+		return window.innerWidth >= MIN_WIDTH;
+	}
+
+	function updateRating(rating) {
+		const value = Math.max(0, Math.min(+rating || 0, MAX_RATING));
+
+		if (ratingValueEl) {
+			ratingValueEl.textContent = value;
+		}
+
+		if (ratingIconsWrap) {
+			const icons = ratingIconsWrap.querySelectorAll('.js-rating .rate');
+
+			icons.forEach((img, index) => {
+				img.src = index < value ? LIKE_SRC : DISLIKE_SRC;
+				img.alt = index < value ? 'Like' : 'Dislike';
+			});
 		}
 	}
 
-	window.addEventListener('scroll', onScroll);
-	window.addEventListener('resize', onScroll);
+	document.addEventListener('mouseover', (e) => {
+		if (!isDesktop()) return;
 
-	onScroll();
+		const link = e.target.closest('.js-link-hover');
+		if (!link) return;
+
+		infoBlock.classList.add('active');
+		if (header) header.classList.add('header-hover');
+
+		const titleEl = link.querySelector('.js-link-hover .text-name');
+		const imgEl = link.querySelector('img');
+		const rating = link.dataset.rating;
+
+		const catBody = link.closest('.cat-body');
+		const catText = catBody?.querySelector('.cat-text');
+
+		if (titleEl && infoTitle) {
+			infoTitle.textContent = titleEl.textContent;
+		}
+
+		if (imgEl && infoImg) {
+			infoImg.classList.remove('active');
+
+			infoImg.onload = () => {
+				infoImg.classList.add('active');
+			};
+
+			infoImg.src = imgEl.src;
+			infoImg.alt = imgEl.alt || '';
+		}
+
+		if (rating) {
+			updateRating(rating);
+		}
+
+		if (infoText && catText) {
+			infoText.textContent = catText.textContent;
+		}
+	});
+
+	document.addEventListener('mouseout', (e) => {
+		if (!isDesktop()) return;
+
+		const link = e.target.closest('.js-link-hover');
+		if (!link) return;
+
+		if (!link.contains(e.relatedTarget)) {
+			infoBlock.classList.remove('active');
+			if (header) header.classList.remove('header-hover');
+
+			if (infoTitle) infoTitle.textContent = '';
+			if (infoText) infoText.textContent = '';
+
+			if (infoImg) {
+				infoImg.classList.remove('active');
+				infoImg.src = '';
+				infoImg.alt = '';
+			}
+
+			if (ratingValueEl) ratingValueEl.textContent = '';
+			if (ratingIconsWrap) {
+				ratingIconsWrap.querySelectorAll('.js-rating .rate').forEach(img => {
+					img.src = '';
+					img.alt = '';
+				});
+			}
+		}
+	});
 }
