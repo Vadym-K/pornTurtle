@@ -165,11 +165,11 @@
 
 body.light {
 	.scrollbar-custom::-webkit-scrollbar {
-	    background-color:rgba(255, 255, 255, 0.70);
+	    background-color:#F0F0F0;
 	}
 
 	.scrollbar-custom::-webkit-scrollbar-track {
-	    background-color:rgba(255, 255, 255, 0.70);
+	    background-color:#F0F0F0;
 	}
 }
 
@@ -639,7 +639,6 @@ body.light {
 		background: url("../images/header-bg.svg") no-repeat bottom center / cover;
 		pointer-events: none;
 		transform: rotate(180deg);
-		z-index: -1;
 
 		@media(max-width: 640px){
 			top: 10%;
@@ -657,11 +656,19 @@ body.light {
 		height: 100%;
 		background: url("../images/clouds-bg.svg") no-repeat bottom center / cover;
 		pointer-events: none;
+		border-bottom: 32px solid #222221;
+		z-index: -1;
+
+		@media(max-width: 1024px){
+			border-width: 17px;
+		}
 	}
 }
 
 .canvas-box {
 	width: 100%;
+	z-index: 1;
+    position: relative;
 }
 
 .rating-sites {
@@ -812,6 +819,11 @@ body.light {
 		}
 		@media(max-width: 480px){
 			background: #8F8F8F;
+			border-color: #a7a2a2;
+
+			.top .text {
+				color: #fff;
+			}
 		}
 		@media(max-width: 380px){
 			width: 280px;
@@ -1396,7 +1408,7 @@ body.light {
 		    position: relative;
 
 		    @media(max-width: 640px){
-		    	background: #8F8F8F;
+		    	// background: #8F8F8F;
 		    	margin: 0 auto;
 		    }
 
