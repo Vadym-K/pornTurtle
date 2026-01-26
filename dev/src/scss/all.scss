@@ -339,12 +339,7 @@ body {
 		}
 
 		.info-block:after {
-			background: linear-gradient(180deg, rgba(194, 192, 192, 0) 0%, #c2c0c0 100%);
-			bottom: 40px;
-
-			@media(max-width: 380px){
-				bottom: 65px;
-			}
+			background: linear-gradient(180deg, rgba(194, 192, 192, 0) 0%, #ecebeb 100%);
 		}
 
 		.blogs-wrap,
