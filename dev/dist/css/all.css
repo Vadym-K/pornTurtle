@@ -135,14 +135,14 @@ body.light .cat-text,
 body.light .cat-list .item:before {
 	color: var(--dark-60, rgba(0, 0, 0, 0.6));
 }
-body.light .cat-link .icon-search {
+body.light .cat-list .icon-search {
 	color: var(--dark-60, rgba(0, 0, 0, 0.2));
 }
 @media (hover: hover) and (pointer: fine) {
-	body.light .cat-link:hover {
+	body.light .cat-list .item:hover:hover {
 		background-color: #fff;
 	}
-	body.light .cat-link:hover .icon-search {
+	body.light .cat-list .item:hover:hover .icon-search {
 		color: #FF9700;
 	}
 }
@@ -1630,14 +1630,16 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 	}
 }
 .cat-list .item {
+	position: relative;
+	padding: 7px 10px 7px 32px;
+	transition: background-color 0.3s, color 0.3s;
+	border-radius: 20px;
+	font-size: 17px;
+	font-weight: 500;
+	width: 100%;
 	display: flex;
 	align-items: center;
-	position: relative;
-}
-@media (hover: hover) and (pointer: fine) {
-	.cat-list .item:hover:before {
-		color: #fff;
-	}
+	justify-content: space-between;
 }
 @media (max-width: 1024px) {
 	.cat-list .item {
@@ -1650,23 +1652,91 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 		width: 50%;
 	}
 }
+@media (hover: hover) and (pointer: fine) {
+	.cat-list .item:hover {
+		background-color: #0B0B0B;
+		z-index: 2;
+	}
+	.cat-list .item:hover:before {
+		color: #fff;
+	}
+	.cat-list .item:hover .cat-link {
+		color: #FF9700;
+	}
+	.cat-list .item:hover .icon-search {
+		color: #fff;
+	}
+}
 .cat-list .item:before {
 	content: counter(item) "";
 	counter-increment: item;
 	font-size: 12px;
 	color: var(--white-60, rgba(255, 255, 255, 0.6));
-	min-width: 14px;
+	min-width: 20px;
 	text-align: right;
 	position: absolute;
 	top: 50%;
-	left: 10px;
+	left: 6px;
 	transform: translate3d(0, -50%, 0);
 	transition: color 0.3s;
+	font-weight: 400;
 	pointer-events: none;
 }
 .cat-list .item:last-child {
 	position: relative;
 	z-index: 2;
+}
+.cat-list .item .cat-link {
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+}
+.cat-list .item .col-left {
+	display: flex;
+	align-items: center;
+	margin-right: 5px;
+	overflow: hidden;
+}
+.cat-list .item .col-right {
+	flex-shrink: 0;
+}
+@media (max-width: 550px) {
+	.cat-list .item .col-right {
+		display: none;
+	}
+}
+.cat-list .item .icon-search {
+	transition: color 0.3s;
+	color: rgba(255, 255, 255, 0.3);
+}
+.cat-list .item .text-name {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+@media (max-width: 1200px) {
+	.cat-list .item .text-name {
+		font-size: 14px;
+	}
+}
+@media (max-width: 1024px) {
+	.cat-list .item .text-name {
+		font-size: 15px;
+	}
+}
+@media (max-width: 550px) {
+	.cat-list .item .text-name {
+		margin-right: 0;
+	}
+}
+@media (max-width: 480px) {
+	.cat-list .item .text-name {
+		max-width: 86px;
+	}
+}
+.cat-list .item .logo-icon {
+	flex-shrink: 0;
+	margin-right: 10px;
 }
 
 .cat-bottom {
@@ -1717,72 +1787,6 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-}
-
-.cat-link {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	transition: background-color 0.3s, color 0.3s;
-	font-size: 17px;
-	font-weight: 500;
-	padding: 7px 10px 7px 30px;
-	border-radius: 20px;
-}
-@media (hover: hover) and (pointer: fine) {
-	.cat-link:hover {
-		color: #FF9700;
-		background-color: #0B0B0B;
-	}
-	.cat-link:hover .icon-search {
-		color: #fff;
-	}
-}
-.cat-link .col-left {
-	display: flex;
-	align-items: center;
-	margin-right: 5px;
-	overflow: hidden;
-}
-.cat-link .icon-search {
-	flex-shrink: 0;
-	transition: color 0.3s;
-	color: rgba(255, 255, 255, 0.3);
-}
-@media (max-width: 550px) {
-	.cat-link .icon-search {
-		display: none;
-	}
-}
-.cat-link .text-name {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-@media (max-width: 1200px) {
-	.cat-link .text-name {
-		font-size: 14px;
-	}
-}
-@media (max-width: 1024px) {
-	.cat-link .text-name {
-		font-size: 15px;
-	}
-}
-@media (max-width: 550px) {
-	.cat-link .text-name {
-		margin-right: 0;
-	}
-}
-@media (max-width: 480px) {
-	.cat-link .text-name {
-		max-width: 86px;
-	}
-}
-.cat-link .logo-icon {
-	flex-shrink: 0;
-	margin-right: 10px;
 }
 
 .cat-box-1 .cat-header {
@@ -2231,10 +2235,6 @@ body.light .scrollbar-custom::-webkit-scrollbar-track {
 	}
 }
 @media (max-width: 480px) {
-	.block.related-sites .box-img {
-		background: #8F8F8F;
-		border-color: #a7a2a2;
-	}
 	.block.related-sites .box-img .top .text {
 		color: #fff;
 	}

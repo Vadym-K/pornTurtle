@@ -166,8 +166,26 @@ function initLinkHoverInfo() {
 	const DISLIKE_SRC = 'images/dislike.svg';
 	const MAX_RATING = 5;
 
+	const imageCache = new Map();
+
 	function isDesktop() {
 		return window.innerWidth >= MIN_WIDTH;
+	}
+
+	function preloadImage(src, callback) {
+		if (!src) return;
+
+		if (imageCache.has(src)) {
+			callback();
+			return;
+		}
+
+		const img = new Image();
+		img.onload = () => {
+			imageCache.set(src, true);
+			callback();
+		};
+		img.src = src;
 	}
 
 	function updateRating(rating) {
@@ -202,10 +220,12 @@ function initLinkHoverInfo() {
 
 		if (ratingValueEl) ratingValueEl.textContent = '';
 		if (ratingIconsWrap) {
-			ratingIconsWrap.querySelectorAll('.js-rating .rate').forEach(img => {
-				img.src = '';
-				img.alt = '';
-			});
+			ratingIconsWrap
+				.querySelectorAll('.js-rating .rate')
+				.forEach(img => {
+					img.src = '';
+					img.alt = '';
+				});
 		}
 	}
 
@@ -215,30 +235,36 @@ function initLinkHoverInfo() {
 		const link = e.target.closest('.js-link-hover');
 		if (!link) return;
 
+		const name = link.dataset.name;
+		const imgSrc = link.dataset.img;
+		const rating = link.dataset.rating;
+
 		infoBlock.classList.add('active');
 		if (header) header.classList.add('header-hover');
 
-		const titleEl = link.querySelector('.js-link-hover .text-name');
-		const imgEl = link.querySelector('img');
-		const rating = link.dataset.rating;
+		if (infoTitle && name) {
+			infoTitle.textContent = name;
+		}
+
+		if (infoImg && imgSrc) {
+			infoImg.classList.remove('active');
+
+			preloadImage(imgSrc, () => {
+				infoImg.src = imgSrc;
+				infoImg.alt = name || '';
+				infoImg.classList.add('active');
+			});
+		}
+
+		if (rating) {
+			updateRating(rating);
+		}
 
 		const catBody = link.closest('.cat-body');
 		const catText = catBody?.querySelector('.cat-text');
-
-		if (titleEl && infoTitle) infoTitle.textContent = titleEl.textContent;
-		if (imgEl && infoImg) {
-			infoImg.classList.remove('active');
-
-			infoImg.onload = () => {
-				infoImg.classList.add('active');
-			};
-
-			infoImg.src = imgEl.src;
-			infoImg.alt = imgEl.alt || '';
+		if (infoText && catText) {
+			infoText.textContent = catText.textContent;
 		}
-
-		if (rating) updateRating(rating);
-		if (infoText && catText) infoText.textContent = catText.textContent;
 	});
 
 	document.addEventListener('mouseout', (e) => {

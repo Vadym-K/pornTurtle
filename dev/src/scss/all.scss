@@ -125,11 +125,11 @@ body {
 			color: var(--dark-60, rgba(0, 0, 0, 0.60));
 		}
 
-		.cat-link .icon-search {
+		.cat-list .icon-search {
 			color: var(--dark-60, rgba(0, 0, 0, 0.20));
 		}
 
-		.cat-link {
+		.cat-list .item:hover {
 			@media(hover: hover) and (pointer: fine){
 				&:hover{
 					background-color: #fff;
